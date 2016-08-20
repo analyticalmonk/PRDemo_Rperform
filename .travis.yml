@@ -2,3 +2,22 @@ language: r
 sudo: false
 cache: packages
 warnings_are_errors: false
+
+r_packages:
+  - microbenchmark
+  - roxygen2
+  - rmarkdown
+
+r_github_packages:
+  - analyticalmonk/Rperform
+
+before_script:
+  - travis_wait 30 source `Rscript -e "cat(find.package(\"Rperform\"))"`/push_gh_pages.sh
+
+env:
+  global:
+  - secure: "p17aMAh2hcyzK59ExIh8wCirdFvZM/BdoOavFomi4oIF4vIN51XDEoIQgySHcL2dEr24BJapIJTrFnfTOzc/6dyfEnF5HJssn1ilBM5jCWy2jY5fQDm0VZqqIHH8bFKRuoC2v6phP3wgKVK8YBAqpbpM338v0RsxAVNjtw0Rf1UO3h4RQMxn+BSvGiB7RKM+7Q24qpmzFxUNvDPT+R67Tguz92ohyoFj4fC9tWYU+qJuznGiciOTtI3wkfaD/zxIt+LjfpxKUJlNzD0Vq4jAmzrO8C5F5YSXGiwtrPoJhnUoQRvDVH4RChQvybCQ9CjzuMSp36DS/5FdDtve5GrmFcW2chSL/DC4/6ZEQLnpc8bU5WkfsTwt5eEvxesSBilGvihg2WwQLXJMeZUf0LSJKm0a4wJCRxqb9kkq0bRHZnv/CP2XZ9VD4rzCIS7zBYk3CI5UR2NYKFHNTy4mv7jeKFgWvSJFCiERW9BIdS0hUK00y/6g1lItdiPbUwllcORzzuqXHO+YD54JqzhWpIzCIlXZzdXBeaZTPoZy04iNeQREVZBR/YCEpL7ilQpZQ07yxV05IZZXiM/B4llBdgZPhUTH/anxCO6Y4x84r6zYZ/ph4+QzO4W3AC+p3wi/6B076+kHUr/0tuO1Q0hrJACGAE8LOMGG04Lc/eBWFReTido="
+  - USER_EMAIL="analyticalmonk@github.com"
+  - USER_NAME="analyticalmonk"
+  - PR_COMMAND="Rperform::plot_PR_webpage(test_path = './tests/testthat/testTime.R', metric = 'time')"
+  - RPERFORM_COMMAND="Rperform::plot_webpage(test_directory = './tests/testthat', metric = 'time')"
